@@ -1,7 +1,6 @@
-package az.edu.itbrains.job.models;
+package az.edu.itbrains.job.dtos.category;
 
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,12 +10,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "tests")
-public class Test {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CategoryExploreDto {
     private Long id;
+    private String icon;
     private String name;
+    private long vacancyCount;
 }

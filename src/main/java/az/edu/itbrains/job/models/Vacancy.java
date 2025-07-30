@@ -30,4 +30,7 @@ public class Vacancy {
 
     @ManyToOne // FOREIGN KEY (category_id) REFERENCES categories(id)
     private Category category; // category_id
+
+    @ManyToOne
+    private Company company;
 }
