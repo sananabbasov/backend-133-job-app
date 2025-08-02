@@ -7,29 +7,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "companies")
-public class Company {
-
+@Table(name = "job_types")
+public class JobType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-    @Column(length = 600)
-    private String description;
-    private String photoUrl;
-    private String address;
 
-
-    @OneToMany(mappedBy = "company")
-    private Set<Vacancy> vacancies = new HashSet<>();
+    @OneToMany(mappedBy = "jobType")
+    private List<Vacancy> vacancies = new ArrayList<>();
 }
