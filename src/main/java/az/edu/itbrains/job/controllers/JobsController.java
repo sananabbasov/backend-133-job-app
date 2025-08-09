@@ -1,6 +1,8 @@
 package az.edu.itbrains.job.controllers;
 
+import az.edu.itbrains.job.dtos.vacancy.VacancyDetailDto;
 import az.edu.itbrains.job.dtos.vacancy.VacancyListDto;
+import az.edu.itbrains.job.payloads.PaginationPayload;
 import az.edu.itbrains.job.services.VacancyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -17,15 +19,18 @@ public class JobsController {
     private final VacancyService vacancyService;
 
     @GetMapping("/jobs") // localhost:8080/jobs
-    public String jobs(Model model){
-        List<VacancyListDto> vacancyListDtoList = vacancyService.getAll();
+    public String jobs(Model model, Integer currentPage){
+        PaginationPayload<VacancyListDto> vacancyListDtoList = vacancyService.getAll(currentPage);
+        model.addAttribute("currentPage", currentPage== null ? 1 : currentPage);
         model.addAttribute("vacancies", vacancyListDtoList);
-        return "jobs.html";
+        return "job/jobs.html";
     }
 
 
     @GetMapping("/job/detail/{id}") // localhost:8080/job/detail/?
-    public String detail(@PathVariable Long id){
-        return "detail.html";
+    public String detail(@PathVariable Long id, Model model){
+        VacancyDetailDto vacancyDetail = vacancyService.getDetailById(id);
+        model.addAttribute("vacancy", vacancyDetail);
+        return "job/detail.html";
     }
 }
